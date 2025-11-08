@@ -29,7 +29,7 @@ public class ExplorerTest
     }
 
     private RandExplorer NewExplorerFor(
-        string labyrinth, 
+        string labyrinth,
         out ExplorerEventsCatcher events,
         params Actions[] actions
     ) {
@@ -46,7 +46,7 @@ public class ExplorerTest
         events = new ExplorerEventsCatcher(explorer);
         return explorer;
     }
-    
+
     [Test]
     public void GetOutNegativeThrowsException()
     {
@@ -58,7 +58,7 @@ public class ExplorerTest
             out var events
         );
         Assert.That(
-            () => test.GetOut(-3), 
+            () => test.GetOut(-3),
             Throws.TypeOf<ArgumentOutOfRangeException>()
         );
         Assert.That(events.DirectionChangedCount, Is.EqualTo(0));
@@ -76,7 +76,7 @@ public class ExplorerTest
             out var events
         );
         Assert.That(
-            () => test.GetOut(0), 
+            () => test.GetOut(0),
             Throws.TypeOf<ArgumentOutOfRangeException>()
         );
         Assert.That(events.DirectionChangedCount, Is.EqualTo(0));
@@ -127,7 +127,7 @@ public class ExplorerTest
               |
             x |
             --+
-            """, 
+            """,
             out var events,
             Actions.TurnLeft
         );
@@ -266,14 +266,11 @@ public class ExplorerTest
             +--+
             """,
             out var events,
-            // auto turn left
-            Actions.Walk, // key
-            // auto turn left
-            Actions.Walk, // door
             Actions.Walk,
-            // auto turn left
-            Actions.Walk, // key
-            Actions.Walk  // door
+            Actions.Walk,
+            Actions.Walk,
+            Actions.Walk,
+            Actions.Walk
         );
         var left = test.GetOut(10);
 
@@ -293,10 +290,10 @@ public class ExplorerTest
             +--+
             """,
             out var events,
-            Actions.Walk,// key
             Actions.Walk,
-            Actions.Walk,// swap keys
-            Actions.Walk // door
+            Actions.Walk,
+            Actions.Walk,
+            Actions.Walk
         );
         var left = test.GetOut(10);
 
