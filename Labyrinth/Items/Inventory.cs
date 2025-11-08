@@ -50,17 +50,6 @@ namespace Labyrinth.Items
             _items.Add(item);
         }
 
-        /// <summary>
-        /// Swaps items between inventories (if any)
-        /// </summary>
-        /// <param name="from">The inventory to swap items with</param>
-        public void SwapItems(Inventory from)
-        {
-            var tmp = _items;
-            _items = from._items;
-            from._items = tmp;
-        }
-
         protected List<ICollectable>? _items = item != null ? new List<ICollectable> { item } : null;
     }
 }
