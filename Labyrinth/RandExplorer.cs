@@ -19,11 +19,17 @@ namespace Labyrinth
         public int GetOut(int n)
         {
             ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(n, 0, "n must be strictly positive");
-            MyInventory bag = new ();
+            MyInventory bag = new();
 
-            for( ; n > 0 && _crawler.FacingTile is not Outside; n--)
+            for (; n > 0 && _crawler.FacingTile is not Outside; n--)
             {
                 EventHandler<CrawlingEventArgs>? changeEvent;
+
+                if (_crawler.FacingTile is Door door && door.IsLocked
+                    && bag.HasKey)
+                {
+                    TryOpenDoorWithAllKeys(door, bag);
+                }
 
                 if (_crawler.FacingTile.IsTraversable
                     && _rnd.Next() == Actions.Walk)
@@ -40,12 +46,6 @@ namespace Labyrinth
                     _crawler.Direction.TurnLeft();
                     changeEvent = DirectionChanged;
                 }
-
-                if (_crawler.FacingTile is Door door && door.IsLocked && bag.HasItems)
-                {
-                    TryOpenDoorWithAllKeys(door, bag);
-                }
-
                 changeEvent?.Invoke(this, new CrawlingEventArgs(_crawler));
             }
             return n;

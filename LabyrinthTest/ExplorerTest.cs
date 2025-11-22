@@ -1,4 +1,4 @@
-﻿using Labyrinth;
+using Labyrinth;
 using Labyrinth.Crawl;
 using Labyrinth.Sys;
 using Moq;
@@ -12,7 +12,7 @@ public class ExplorerTest
     {
         public ExplorerEventsCatcher(RandExplorer explorer)
         {
-            explorer.PositionChanged  += (s, e) => CatchEvent(ref _positionChangedCount , e);
+            explorer.PositionChanged += (s, e) => CatchEvent(ref _positionChangedCount, e);
             explorer.DirectionChanged += (s, e) => CatchEvent(ref _directionChangedCount, e);
         }
         public int PositionChangedCount => _positionChangedCount;
@@ -32,7 +32,8 @@ public class ExplorerTest
         string labyrinth,
         out ExplorerEventsCatcher events,
         params Actions[] actions
-    ) {
+    )
+    {
         var laby = new Labyrinth.Labyrinth(labyrinth);
         var mockRnd = new Mock<IEnumRandomizer<Actions>>();
 
@@ -62,7 +63,7 @@ public class ExplorerTest
             Throws.TypeOf<ArgumentOutOfRangeException>()
         );
         Assert.That(events.DirectionChangedCount, Is.EqualTo(0));
-        Assert.That(events.PositionChangedCount , Is.EqualTo(0));
+        Assert.That(events.PositionChangedCount, Is.EqualTo(0));
     }
 
     [Test]
@@ -80,7 +81,7 @@ public class ExplorerTest
             Throws.TypeOf<ArgumentOutOfRangeException>()
         );
         Assert.That(events.DirectionChangedCount, Is.EqualTo(0));
-        Assert.That(events.PositionChangedCount , Is.EqualTo(0));
+        Assert.That(events.PositionChangedCount, Is.EqualTo(0));
     }
 
     [Test]
@@ -99,7 +100,7 @@ public class ExplorerTest
 
         Assert.That(left, Is.EqualTo(0));
         Assert.That(events.DirectionChangedCount, Is.EqualTo(10));
-        Assert.That(events.PositionChangedCount , Is.EqualTo(0));
+        Assert.That(events.PositionChangedCount, Is.EqualTo(0));
     }
 
     [Test]
@@ -116,7 +117,7 @@ public class ExplorerTest
 
         Assert.That(left, Is.EqualTo(10));
         Assert.That(events.DirectionChangedCount, Is.EqualTo(0));
-        Assert.That(events.PositionChangedCount , Is.EqualTo(0));
+        Assert.That(events.PositionChangedCount, Is.EqualTo(0));
     }
 
     [Test]
@@ -136,7 +137,7 @@ public class ExplorerTest
 
         Assert.That(left, Is.EqualTo(9));
         Assert.That(events.DirectionChangedCount, Is.EqualTo(1));
-        Assert.That(events.PositionChangedCount , Is.EqualTo(0));
+        Assert.That(events.PositionChangedCount, Is.EqualTo(0));
         Assert.That(events.LastArgs, Is.EqualTo((0, 2, Direction.West)));
     }
 
@@ -176,7 +177,7 @@ public class ExplorerTest
         var left = test.GetOut(10);
 
         Assert.That(left, Is.EqualTo(8));
-        Assert.That(events.PositionChangedCount , Is.EqualTo(1));
+        Assert.That(events.PositionChangedCount, Is.EqualTo(1));
         Assert.That(events.DirectionChangedCount, Is.EqualTo(1));
         Assert.That(events.LastArgs, Is.EqualTo((0, 1, Direction.West)));
     }
@@ -199,7 +200,7 @@ public class ExplorerTest
 
         Assert.That(left, Is.EqualTo(0));
         Assert.That(events.DirectionChangedCount, Is.EqualTo(1));
-        Assert.That(events.PositionChangedCount , Is.EqualTo(2));
+        Assert.That(events.PositionChangedCount, Is.EqualTo(2));
         Assert.That(events.LastArgs, Is.EqualTo((0, 1, Direction.West)));
     }
 
@@ -230,7 +231,7 @@ public class ExplorerTest
 
         Assert.That(left, Is.EqualTo(5));
         Assert.That(events.DirectionChangedCount, Is.EqualTo(5));
-        Assert.That(events.PositionChangedCount , Is.EqualTo(5));
+        Assert.That(events.PositionChangedCount, Is.EqualTo(5));
         Assert.That(events.LastArgs, Is.EqualTo((0, 1, Direction.West)));
     }
 
@@ -251,7 +252,7 @@ public class ExplorerTest
 
         Assert.That(left, Is.EqualTo(8));
         Assert.That(events.DirectionChangedCount, Is.EqualTo(0));
-        Assert.That(events.PositionChangedCount , Is.EqualTo(2));
+        Assert.That(events.PositionChangedCount, Is.EqualTo(2));
         Assert.That(events.LastArgs, Is.EqualTo((2, 0, Direction.North)));
     }
 
@@ -276,7 +277,7 @@ public class ExplorerTest
 
         Assert.That(left, Is.EqualTo(2));
         Assert.That(events.DirectionChangedCount, Is.EqualTo(3));
-        Assert.That(events.PositionChangedCount , Is.EqualTo(5));
+        Assert.That(events.PositionChangedCount, Is.EqualTo(5));
         Assert.That(events.LastArgs, Is.EqualTo((3, 3, Direction.East)));
     }
 
@@ -299,7 +300,7 @@ public class ExplorerTest
 
         Assert.That(left, Is.EqualTo(3));
         Assert.That(events.DirectionChangedCount, Is.EqualTo(3));
-        Assert.That(events.PositionChangedCount , Is.EqualTo(4));
+        Assert.That(events.PositionChangedCount, Is.EqualTo(4));
         Assert.That(events.LastArgs, Is.EqualTo((3, 2, Direction.East)));
     }
 }

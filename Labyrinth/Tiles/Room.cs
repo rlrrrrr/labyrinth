@@ -1,4 +1,4 @@
-﻿using Labyrinth.Items;
+using Labyrinth.Items;
 
 namespace Labyrinth.Tiles
 {
@@ -12,5 +12,13 @@ namespace Labyrinth.Tiles
     public class Room(ICollectable? item = null) : Tile(item)
     {
         public override bool IsTraversable => true;
+
+        /// <summary>
+        /// True if the room contains at least one key.
+        /// </summary>
+        public bool HasKey => LocalInventory.HasItems && LocalInventory.ItemTypes.Any(type => type == typeof(Key));
     }
+
+
+
 }
