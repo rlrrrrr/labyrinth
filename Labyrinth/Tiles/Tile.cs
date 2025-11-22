@@ -1,4 +1,4 @@
-﻿using Labyrinth.Items;
+using Labyrinth.Items;
 
 namespace Labyrinth.Tiles
 {
@@ -13,7 +13,7 @@ namespace Labyrinth.Tiles
         public abstract bool IsTraversable { get; }
 
         /// <summary>
-        /// Actually pass through the tile. 
+        /// Actually pass through the tile.
         /// </summary>
         /// <exception cref="InvalidOperationException">The tile is not traversable.</exception>
         /// <see cref="IsTraversable"/>
@@ -26,6 +26,6 @@ namespace Labyrinth.Tiles
             return LocalInventory;
         }
 
-        protected MyInventory LocalInventory { get; private init; } = new (item);
+        protected MyInventory LocalInventory { get; private init; } = new(item);
     }
 }

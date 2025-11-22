@@ -10,5 +10,10 @@ namespace Labyrinth.Items
         /// Items in the inventory, or empty enumerable if no items.
         /// </summary>
         public IEnumerable<ICollectable> Items => _items ?? Enumerable.Empty<ICollectable>();
+
+        /// <summary>
+        /// True if the inventory contains at least one key.
+        /// </summary>
+        public bool HasKey => HasItems && ItemTypes.Any(type => type == typeof(Key));
     }
 }

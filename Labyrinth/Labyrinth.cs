@@ -1,4 +1,4 @@
-﻿using Labyrinth.Crawl;
+using Labyrinth.Crawl;
 using Labyrinth.Tiles;
 using System.Text;
 
@@ -16,7 +16,7 @@ namespace Labyrinth
         {
             Build.AsciiParser parser = new();
 
-            parser.StartPositionFound+= (s, e) => _start = (e.X, e.Y);
+            parser.StartPositionFound += (s, e) => _start = (e.X, e.Y);
             _tiles = parser.Parse(ascii_map);
             if (_tiles.GetLength(0) < 3 || _tiles.GetLength(1) < 3)
             {
@@ -52,6 +52,7 @@ namespace Labyrinth
                 {
                     res.Append(_tiles[x, y] switch
                     {
+                        Room room when room.HasKey => 'k',
                         Room => ' ',
                         Wall => '#',
                         Door => '/',
